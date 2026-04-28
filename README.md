@@ -9,12 +9,14 @@ This repository contains the materials necessary for running DS 4320 Project 2. 
 
 **DOI:** https://doi.org/10.5281/zenodo.19362629
 
-**PRESS RELEASE LINK**  [Read the Press Release](/press_release.md)
+**PRESS RELEASE LINK:**  [Read the Press Release](/press_release.md)
 
-**PIPELINE LINK** [View Pipeline](./pipeline/pipeline.ipynb)
+**PIPELINE LINK:** [View Pipeline](./pipeline/pipeline.ipynb)
 
 
 **License:** MIT — see [LICENSE](./LICENSE)
+
+**DOI:** https://doi.org/10.5281/zenodo.19866741
 
 ---
 
