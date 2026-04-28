@@ -2,13 +2,12 @@
 
 <a id="press-release-anchor"></a>
 
----
 
 ## The Hook
 
 Everyone knows highways and smokestacks dirty the air — but in hundreds of American counties, the biggest invisible threat to clean air isn't a factory. It's the farm down the road. New data analysis reveals that counties with the heaviest agricultural footprint consistently breathe dirtier air, and the public health toll has been hiding in plain sight inside two federal datasets that had never been matched together.
 
----
+
 
 ## Problem Statement
 
@@ -18,7 +17,6 @@ Agriculture is the single largest contributor to fine particulate matter (PM2.5)
 
 The result: rural public health officials have no simple, accessible tool to identify which counties are most at risk, and policymakers have lacked the evidence needed to act.
 
----
 
 ## Solution Description
 
@@ -34,13 +32,12 @@ These three metrics are combined into a composite Agricultural Intensity Score a
 
 The finding is immediately actionable: the same two free, public federal datasets updated every year could power a dashboard that flags high-risk counties before an air quality crisis emerges.
 
----
 
 ## Chart
 
 The chart below plots every US county with sufficient AQI monitoring data (≥ 50 measurement days in 2022). Each point represents one county. The horizontal axis shows its Agricultural Intensity Score; the vertical axis shows its Median Annual AQI. The red trend line and AQI threshold references (50 = Moderate, 100 = Unhealthy) make the pattern unmistakable: as agricultural intensity rises, so does the air quality index.
 
-![Agricultural Intensity vs. Median AQI — US Counties 2022](ag_aqi_chart.png)
+![Agricultural Intensity vs. Median AQI — US Counties 2022](pipeline/ag_aqi_scatter.png)
 
 *Figure: US County-Level Agricultural Intensity Score vs. Median Annual AQI (2022). Each point is one county. Color encodes AQI severity (green = good, red = unhealthy). The crimson trend line shows a positive correlation: higher agricultural intensity predicts worse air quality. Orange and red dashed lines mark the EPA's "Moderate" and "Unhealthy" AQI thresholds, respectively. Source: EPA Annual AQI by County 2022; USDA Census of Agriculture 2022.*
 

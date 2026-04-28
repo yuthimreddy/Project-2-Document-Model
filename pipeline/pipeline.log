@@ -24,3 +24,18 @@
 2026-04-28 16:15:24,738  ERROR  NASS fetch failed for "CORN - ACRES HARVESTED": 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&short_desc=CORN+-+ACRES+HARVESTED&domain_desc=TOTAL&agg_level_desc=COUNTY&year=2017&format=JSON
 2026-04-28 16:29:15,482  INFO  Pipeline started
 2026-04-28 16:29:15,666  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:33:52,979  INFO  Pipeline started
+2026-04-28 16:33:53,210  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:35:30,845  INFO  Pipeline started
+2026-04-28 16:35:31,009  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:38:45,126  INFO  Cattle inventory rows: 3024
+2026-04-28 16:38:57,049  ERROR  FIPS crosswalk download failed: Usecols do not match columns, columns expected but not found: ['STATEAB']
+2026-04-28 16:46:26,686  INFO  Pipeline started
+2026-04-28 16:46:26,865  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:46:26,928  INFO  Cattle inventory rows: 3024
+2026-04-28 16:46:27,132  ERROR  FIPS crosswalk download failed: Usecols do not match columns, columns expected but not found: ['STATEAB']
+2026-04-28 16:47:12,847  INFO  FIPS crosswalk loaded: 3235 rows
+2026-04-28 16:47:21,434  INFO  Inserted 926 documents into county_aqi_agriculture
+2026-04-28 16:47:25,386  INFO  Model R²=-0.0081, MAE=7.19
+2026-04-28 16:48:09,322  INFO  Scatter chart saved: ag_aqi_scatter.png
+2026-04-28 16:48:13,092  INFO  Bar chart saved: ag_aqi_quartile_bar.png
