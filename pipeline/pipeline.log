@@ -1,0 +1,26 @@
+2026-04-28 16:01:29,195  INFO  Pipeline started
+2026-04-28 16:01:29,398  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:02:29,498  ERROR  NASS fetch failed for FIELD CROPS: HTTPSConnectionPool(host='quickstats.nass.usda.gov', port=443): Read timed out. (read timeout=60)
+2026-04-28 16:04:58,554  INFO  Pipeline started
+2026-04-28 16:05:28,594  ERROR  EPA download failed: HTTPSConnectionPool(host='aqs.epa.gov', port=443): Max retries exceeded with url: /aqsweb/airdata/annual_aqi_by_county_2022.zip (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x168700ad0>, 'Connection to aqs.epa.gov timed out. (connect timeout=30)'))
+2026-04-28 16:06:11,841  INFO  Pipeline started
+2026-04-28 16:06:11,993  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:06:54,523  ERROR  NASS fetch failed for FIELD CROPS: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=CROPS&commodity_desc=FIELD+CROPS&statisticcat_desc=AREA+HARVESTED&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:07:56,091  ERROR  NASS fetch failed for FIELD CROPS: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=CROPS&commodity_desc=FIELD+CROPS&statisticcat_desc=AREA+HARVESTED&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:09:28,079  ERROR  NASS fetch failed for CORN: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=ANIMALS+%26+PRODUCTS&commodity_desc=CORN&statisticcat_desc=AREA+HARVESTED&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:10:37,960  INFO  NASS CORN/AREA HARVESTED: 31913 rows
+2026-04-28 16:10:40,131  ERROR  NASS fetch failed for CATTLE, INCL CALVES: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=ANIMALS+%26+PRODUCTS&commodity_desc=CATTLE%2C+INCL+CALVES&statisticcat_desc=INVENTORY&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:10:53,035  INFO  NASS CORN/AREA HARVESTED: 31913 rows
+2026-04-28 16:10:53,181  ERROR  NASS fetch failed for CATTLE: 401 Client Error: Unauthorized for url: https://quickstats.nass.usda.gov/api/api_GET/?key=INVENTORY&source_desc=CENSUS&sector_desc=ANIMALS+%26+PRODUCTS&commodity_desc=CATTLE&statisticcat_desc=INCL+CALVES&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:11:57,043  ERROR  FIPS crosswalk download failed: Usecols do not match columns, columns expected but not found: ['STATEAB']
+2026-04-28 16:12:18,180  INFO  NASS CORN/AREA HARVESTED: 31913 rows
+2026-04-28 16:12:18,283  ERROR  NASS fetch failed for CATTLE, INCL CALVES: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=ANIMALS+%26+PRODUCTS&commodity_desc=CATTLE%2C+INCL+CALVES&statisticcat_desc=INVENTORY&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:12:46,217  INFO  NASS CORN/AREA HARVESTED: 31913 rows
+2026-04-28 16:12:50,013  ERROR  NASS fetch failed for CATTLE, INCL CALVES: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=ANIMALS+%26+PRODUCTS&commodity_desc=CATTLE%2C+INCL+CALVES&statisticcat_desc=HEAD&agg_level_desc=COUNTY&year=2022&format=JSON
+2026-04-28 16:13:45,064  INFO  Pipeline started
+2026-04-28 16:13:45,270  INFO  EPA AQI 2022: 1003 rows downloaded
+2026-04-28 16:13:57,033  INFO  NASS CORN/AREA HARVESTED: 14572 rows
+2026-04-28 16:13:58,917  ERROR  NASS fetch failed for CATTLE, INCL CALVES: 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&sector_desc=ANIMALS+%26+PRODUCTS&commodity_desc=CATTLE%2C+INCL+CALVES&statisticcat_desc=INVENTORY&domain_desc=TOTAL&agg_level_desc=COUNTY&year=2017&format=JSON
+2026-04-28 16:15:24,738  ERROR  NASS fetch failed for "CORN - ACRES HARVESTED": 400 Client Error: Bad Request for url: https://quickstats.nass.usda.gov/api/api_GET/?key=3682E9B4-405E-3DD7-8359-61CC0112E3DA&source_desc=CENSUS&short_desc=CORN+-+ACRES+HARVESTED&domain_desc=TOTAL&agg_level_desc=COUNTY&year=2017&format=JSON
+2026-04-28 16:29:15,482  INFO  Pipeline started
+2026-04-28 16:29:15,666  INFO  EPA AQI 2022: 1003 rows downloaded
