@@ -1,4 +1,4 @@
-# DS 4320 Project 2: [Placeholder]
+# DS 4320 Project 2: Agricultural Intensity vs. Air Quality 
 
 ## Executive Summary: 
 This repository contains the materials necessary for running DS 4320 Project 2. The project addresses the problem of air pollution running rampant, by using county-level AQI and USDA farming metrics to predict the air pollution of counties.  -- REFINE
@@ -9,8 +9,8 @@ This repository contains the materials necessary for running DS 4320 Project 2. 
 
 **DOI:** https://doi.org/10.5281/zenodo.19362629
 
-**PRESS RELEASE LINK**
-**PIPELINE LINK**
+**PRESS RELEASE LINK**  [Read the Press Release](/press_release.md)
+**PIPELINE LINK** [View Pipeline](./pipeline/pipeline.ipynb)
 
 **License:** MIT — see [LICENSE](./LICENSE)
 
