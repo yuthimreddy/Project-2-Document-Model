@@ -70,12 +70,12 @@ This project sits at the intersection of environmental data science and agricult
 ## Data Creation
 
 ### Data Acquisition Process:
+
 This project uses two publicly available federal datasets, both covering the year 2022.
 
 **EPA Annual AQI by County (2022):** The U.S. Environmental Protection Agency maintains a national network of groundlevel air quality monitoring stations. Each station records daily readings that are summarized into the Air Quality Index (AQI). At the end of each calendar year, the EPA publishes a countylevel summary CSV that aggregates these readings per county, reporting the number of days in each AQI category (good, moderate, unhealthy, etc.), the median AQI, the maximum AQI, and the number of days with valid measurements. The 2022 dataset was downloaded directly from the EPA AirData bulk download portal at `https://aqs.epa.gov/aqsweb/airdata/annual_aqi_by_county_2022.zip`. Not every US county has a monitoring station, with coverage skewed toward more populated or industrialized counties meaning that rural agricultural counties may be underrepresented.
 
-**USDA Census of Agriculture (2022):** Every five years the USDA National Agricultural Statistics Service (NASS) conducts a comprehensive census of all US farms and ranches. The 2022 Census was released in early 2024. Countylevel agricultural metrics, including total cropland acreage, livestock inventory (cattle and hogs), and number of farms, were retrieved programmatically via the USDA NASS QuickStats API (`https://quickstats.nass.usda.gov/api/api_GET/`). The API returns data filtered by commodity description, geographic level, and year. FIPS codes provided by both agencies serve as the join key between the two datasets.
-
+**USDA Census of Agriculture (2017):** County-level cattle inventory data was downloaded directly from the USDA NASS QuickStats web interface as a CSV file (Census 2017, County geographic level, TOTAL domain) and saved to `data/usda_nass_data.csv`. The 2017 Census is used as it has full county-level coverage in QuickStats.
 
 ### Code Table
 
@@ -95,7 +95,9 @@ This project uses two publicly available federal datasets, both covering the yea
 
 **Agricultural intensity score construction:** Combining cropland acres, livestock count, and farm density into a single composite score makes the visualization interpretable but obscures which component drives any observed correlation. Individual feature regressions are retained in the analysis notebook so readers can attribute effects to specific agricultural activities rather than the composite.
 
-**Year selection (2022):** The 2022 USDA Census is the most recent available and matches the EPA AQI year exactly, minimizing temporal mismatch. An alternative would have been 2017 (prior census year), but post-COVID agricultural disruptions make 2022 more representative of current conditions.
+**Year selection (2017):** USDA cattle inventory uses the 2017 Census of Agriculture, as 2017 has complete county-level 
+coverage in QuickStats. This introduces a 5-year temporal gap which is noted as a limitation since agricultural land use patterns are relatively stable at the county level 
+over 5-year periods, partially mitigating this mismatch.
 
 **Excluding wildfire counties:** Counties in the western US that experienced major wildfires in 2022 (identified by >30 "Very Unhealthy" or "Hazardous" AQI days) will be flagged as potential outliers. Including them without annotation would overstate the relationship between agriculture and AQI in high fire risk states like California and Oregon.
 
@@ -139,10 +141,8 @@ Because this project uses MongoDB to store merged countylevel records, the follo
 - `days_good`, `days_moderate`, `days_unhealthy_sensitive`, `days_unhealthy`, `days_very_unhealthy`, `days_hazardous` (integers): Day counts per AQI category.
 
 **Nested sub-document — `agriculture` (required if USDA data is available):**
-- `cropland_acres` (float): Harvested cropland in acres; `null` if not reported by USDA.
 - `cattle_inventory` (integer): Head of cattle; `null` if not reported.
-- `hog_inventory` (integer): Head of hogs; `null` if not reported.
-- `num_farms` (integer): Total number of farms; `null` if not reported.
+
 
 **Optional derived fields (added during analysis, not ingestion):**
 - `ag_intensity_score` (float): Computed composite score — not stored in raw collection, only in the `county_merged` collection.
@@ -154,8 +154,7 @@ Because this project uses MongoDB to store merged countylevel records, the follo
 | Collection | Source | Records (approx.) | Key Fields | Notes |
 |---|---|---|---|---|
 | `aqi_county_2022` | EPA AirData | ~3,100 | `fips`, `median_aqi`, `max_aqi`, `days_measured`, 6 day-count fields | Not all US counties have monitors; ~800 counties absent |
-| `usda_cropland_2022` | USDA NASS QuickStats API | ~2,900 | `fips`, `state`, `county`, `cropland_acres` | Some counties consolidated by USDA for confidentiality |
-| `usda_livestock_2022` | USDA NASS QuickStats API | ~2,700 | `fips`, `cattle_inventory`, `hog_inventory` | Sparse in western states with low livestock density |
+| `usda_cattle_2017` | USDA NASS QuickStats API | ~2,700 | `fips`, `cattle_inventory` | Sparse in western states with low livestock density |
 | `county_merged` | Joined (EPA + USDA) | ~2,400 | All above fields + `ag_intensity_score`, `outlier_wildfire` | Inner join on FIPS; counties missing either source are excluded |
 
 **Total unique US counties:** 3,143  
@@ -170,11 +169,8 @@ Because this project uses MongoDB to store merged countylevel records, the follo
 |---|---|---|---|---|---|---|
 | `aqi.median` | ~12.0 | ~130.0 | ~38.5 | ~12.0 | Sensor calibration drift (~±2 AQI units); spatial interpolation error for counties with few monitors | **Low–Medium** |
 | `aqi.max` | 15 | 500 | ~75 | ~45 | Single-day extremes are highly sensitive to wildfire events and sensor anomalies; high variance in fire-prone states | **High** (fire-prone counties) |
-| `aqi.days_measured` | 1 | 366 | ~280 | ~80 | Gaps from sensor downtime, maintenance, or QA rejection; fewer days = less reliable median | **Medium** (inversely with coverage) |
-| `agriculture.cropland_acres` | 0 | ~3,500,000 | ~85,000 | ~150,000 | USDA withholds data for counties where reporting would identify individual farms (confidentiality suppression); right-skewed by large plains counties | **Medium** |
-| `agriculture.cattle_inventory` | 0 | ~1,200,000 | ~28,000 | ~65,000 | Self-reported census data; undercounting likely for small-scale operations; zero values may be true zeros or suppressed data | **Medium–High** |
-| `agriculture.hog_inventory` | 0 | ~800,000 | ~15,000 | ~50,000 | Highly concentrated geographically (Iowa, N. Carolina dominate); most counties report near-zero; extreme outliers inflate mean | **High** (skewed) |
-| `agriculture.num_farms` | 0 | ~6,500 | ~520 | ~430 | Threshold-based census inclusion (farms below USDA minimum sales threshold excluded); undercounts subsistence/small farms | **Low–Medium** |
+| `aqi.days_measured` | 1 | 366 | ~280 | ~80 | Gaps from sensor downtime, maintenance, or QA rejection; fewer days = less reliable median | **Medium** (inversely with coverage) |**Medium** |
+| `agriculture.cattle_inventory` | 0 | ~1,200,000 | ~28,000 | ~65,000 | Self-reported census data; undercounting likely for small-scale operations; zero values may be true zeros or suppressed data | **Medium–High** | **High** (skewed) |**Low–Medium** |
 | `ag_intensity_score` | 0.0 | 1.0 | ~0.18 | ~0.15 | Propagates uncertainty from all three input variables; normalization method (min-max) is sensitive to outliers | **Medium** |
 
 **Propagated uncertainty:**  
